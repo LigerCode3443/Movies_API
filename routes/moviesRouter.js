@@ -3,9 +3,13 @@ import moviesControllers from "../controllers/moviesControllers.js";
 import validateBody from "../decorators/validateBody.js";
 
 import isValidId from "../middlewares/isValidId.js";
+import {
+  createMovieSchema,
+  updateMovieSchema,
+} from "../schemas/moviesSchemas.js";
 
-const addMiddleware = validateBody();
-const updateMiddleware = validateBody();
+const addMiddleware = validateBody(createMovieSchema);
+const updateMiddleware = validateBody(updateMovieSchema);
 
 const moviesRouter = Router();
 

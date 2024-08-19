@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export const createContactSchema = Joi.object({
+export const createMovieSchema = Joi.object({
   title: Joi.string().required(),
   description: Joi.string().required(),
   genres: Joi.string().required(),
@@ -11,7 +11,7 @@ export const createContactSchema = Joi.object({
   actors: Joi.string().required(),
 });
 
-export const updateContactSchema = Joi.object({
+export const updateMovieSchema = Joi.object({
   title: Joi.string(),
   description: Joi.string(),
   genres: Joi.string(),

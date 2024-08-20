@@ -25,7 +25,6 @@ const movieSchema = new Schema(
     },
     poster: {
       type: String,
-      required: true,
     },
     release_date: {
       type: String,

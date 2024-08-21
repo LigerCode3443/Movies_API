@@ -1,6 +1,12 @@
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
 import HttpError from "../helpers/HttpError.js";
 import * as moviesServices from "../services/moviesServices.js";
+import path, { dirname } from "path";
+import * as url from "url";
+import fs from "fs/promises";
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+const moviesDir = path.join(__dirname, "../", "public", "movies");
 
 const getAllMovies = async (_, res) => {
   const result = await moviesServices.getMovies();
@@ -17,7 +23,16 @@ const getOneMovie = async (req, res) => {
 };
 
 const addMovie = async (req, res) => {
-  const result = await moviesServices.addMovie(req.body);
+  const { path: tempUpload, originalname } = req.file;
+
+  const filename = `${Date.now()}_${originalname}`;
+  const resultUpload = path.join(moviesDir, filename);
+  await fs.rename(tempUpload, resultUpload);
+  const movieData = {
+    ...req.body,
+    poster: resultUpload,
+  };
+  const result = await moviesServices.addMovie(movieData);
 
   res.status(201).json(result);
 };

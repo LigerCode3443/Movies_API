@@ -7,6 +7,7 @@ import {
   createMovieSchema,
   updateMovieSchema,
 } from "../schemas/moviesSchemas.js";
+import upload from "../middlewares/upload.js";
 
 const addMiddleware = validateBody(createMovieSchema);
 const updateMiddleware = validateBody(updateMovieSchema);
@@ -15,7 +16,12 @@ const moviesRouter = Router();
 
 moviesRouter.get("/", moviesControllers.getAllMovies);
 moviesRouter.get("/:id", isValidId, moviesControllers.getOneMovie);
-moviesRouter.post("/", addMiddleware, moviesControllers.addMovie);
+moviesRouter.post(
+  "/",
+  addMiddleware,
+  upload.single("poster"),
+  moviesControllers.addMovie
+);
 moviesRouter.put(
   "/:id",
   isValidId,

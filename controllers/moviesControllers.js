@@ -26,7 +26,7 @@ const addMovie = async (req, res) => {
   const { path: tempUpload, originalname } = req.file;
 
   const filename = `${Date.now()}_${originalname}`;
-  const resultUpload = path.join(moviesDir, filename);
+  const resultUpload = path.join(moviesDir, originalname);
   await fs.rename(tempUpload, resultUpload);
   const movieData = {
     ...req.body,

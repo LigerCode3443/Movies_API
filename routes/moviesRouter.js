@@ -18,7 +18,7 @@ moviesRouter.get("/", moviesControllers.getAllMovies);
 moviesRouter.get("/:id", isValidId, moviesControllers.getOneMovie);
 moviesRouter.post(
   "/",
-  addMiddleware,
+
   upload.single("poster"),
   moviesControllers.addMovie
 );

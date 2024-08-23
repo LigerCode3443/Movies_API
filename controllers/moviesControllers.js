@@ -61,10 +61,23 @@ const deleteMovie = async (req, res) => {
   res.json({ message: "Delete success" });
 };
 
+const updateMovieByIdFavorite = async (req, res) => {
+  const { id } = req.params;
+  const { favorite } = req.body;
+
+  const result = await moviesServices.updateMovieFavorite(id, { favorite });
+
+  if (!result) {
+    throw HttpError(404, `Movie with id=${id} not found`);
+  }
+  res.json(result);
+};
+
 export default {
   getAllMovies: ctrlWrapper(getAllMovies),
   getOneMovie: ctrlWrapper(getOneMovie),
   addMovie: ctrlWrapper(addMovie),
   updateMovie: ctrlWrapper(updateMovie),
   deleteMovie: ctrlWrapper(deleteMovie),
+  updateMovieByIdFavorite: ctrlWrapper(updateMovieByIdFavorite),
 };

@@ -9,3 +9,6 @@ export const addMovie = (data) => Movies.create(data);
 export const updateMovieById = (id, data) => Movies.findByIdAndUpdate(id, data);
 
 export const deleteMovie = (id) => Movies.findByIdAndDelete(id);
+
+export const updateMovieFavorite = (id, data) =>
+  Movies.findByIdAndUpdate(id, data);

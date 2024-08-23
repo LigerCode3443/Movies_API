@@ -21,3 +21,7 @@ export const updateMovieSchema = Joi.object({
   release_date: Joi.string(),
   actors: Joi.string(),
 });
+
+export const updateMovieSchemaFavorite = Joi.object({
+  favorite: Joi.boolean().required(),
+});

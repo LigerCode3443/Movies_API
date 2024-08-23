@@ -6,11 +6,13 @@ import isValidId from "../middlewares/isValidId.js";
 import {
   createMovieSchema,
   updateMovieSchema,
+  updateMovieSchemaFavorite,
 } from "../schemas/moviesSchemas.js";
 import upload from "../middlewares/upload.js";
 
 const addMiddleware = validateBody(createMovieSchema);
 const updateMiddleware = validateBody(updateMovieSchema);
+const updateMiddlewareFavorite = validateBody(updateMovieSchemaFavorite);
 
 const moviesRouter = Router();
 
@@ -29,5 +31,12 @@ moviesRouter.put(
   moviesControllers.updateMovie
 );
 moviesRouter.delete("/:id", isValidId, moviesControllers.deleteMovie);
+
+moviesRouter.patch(
+  "/:id/favorite",
+  isValidId,
+  updateMiddlewareFavorite,
+  moviesControllers.updateMovieByIdFavorite
+);
 
 export default moviesRouter;
